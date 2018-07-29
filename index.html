@@ -2,13 +2,7 @@
 layout: default
 title: CS498-data visualization
 ---
-<style>
-p {
-    font-size: 0.6em;
-    line-height: 1.4em;
-    color: #333;
-}
-</style>
+
 <div class="blurb">
     <h1>Crimes in Chicago(2012-2016)</h1>
     <p>This project is to use an interactive slideshow to illustrate the patterns of <a href="https://www.kaggle.com/currie32/crimes-in-chicago">Chicago Crime.</a></p>
@@ -20,7 +14,24 @@ p {
     <p>3. Scene 3: The arrest rate of each crime type. This sorted bar chart helps user to investigate the hypothesis dedrived from last scene. User can look up if the crime type that reduced significantly has high arrest rate, and vise versa.</p>
     <p>To conclude, this narrative visualization used 3 interactive scenes to demonstrate the information I found in this dataset. Users are provided with various forms of interaction (including mouseover tooltip, checkbox and list box) to investigate the detailed information they may be interested in.</p>
     <p></p>
-    <h2>Annotations</h2>      
+    <h2>Annotations</h2>
+	<p>Annotations are used in all scenes, tooltip is provided by mouse-over action. By hovering above the nodes, bars and arcs, users can get detailed information.</p>
+	<p></p>          
+    <h2>Parameters</h2>
+	<p>The navigation bar on top works as the parameter to help users move among scenes. Additionally, in scene 2, the year buttons below the chart used as parameter to filter the data, this enable the users to investigate crime type percentages for each year and compare between years.</p>
+	<p></p>
+	<h2>Triggers</h2>
+	<p>Clicking different tabs on the navigation bar triggers the navigation between scenes. The mouseover/mousemove action works as trigger for tooltips in all four scenes. By clicking year buttons in scene 2, the users trigger data filtering action based on year.</p>
+    <p>To conclude, those interactive design embedded in the charts enhances narrative story telling for this visualization.</p>
+	<p></p>
+	<h2>Resource</h2>
+    <p><a href="https://www.kaggle.com/currie32/crimes-in-chicago">Chicago Crime.</a></p>
+    <p><a href="http://bl.ocks.org/asielen/44ffca2877d0132572cb">Reusable Responsive Multiline Chart.</a></p>
+    <p><a href="https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2">Reusable Responsive Donut Chart.</a></p>
+    <p><a href="https://bl.ocks.org/anonymous/e88acea4307a96d5e267daaf737192e6">Horizontal Bar Chart Sort.</a></p>
+    <p><a href="http://jmcglone.com/guides/github-pages/">HTML template.</a></p>
+
+
 
 
 </div><!-- /.blurb -->
