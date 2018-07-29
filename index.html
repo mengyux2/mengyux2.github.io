@@ -8,7 +8,7 @@ title: CS498-data visualization
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>CS498-data visualization</title>
     <link rel="stylesheet" type="text/css" href="multiline.css">
     <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
     <!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
@@ -26,7 +26,13 @@ title: CS498-data visualization
 </head>
 <body>
 <div class="chart-wrapper" id="chart-line1"></div>
-
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/donut">Scene2</a></li>
+                    <li><a href="/sort_bar">Scene3</a></li>
+                </ul>
+            </nav>
 <script type="text/javascript">
     d3.csv('Chicago_Crimes_2012_to_2016_light_multiline_agg.csv', function(error, data) {
     data.forEach(function (d) {
