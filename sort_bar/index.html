@@ -2,10 +2,118 @@
 layout: default
 title: CS498-data visualization
 ---
-	<h1>{{ page.title }}</h1>
-	<ul class="posts">
+<!DOCTYPE html>
+<head>
 
-	  {% for post in site.posts %}
-	    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-	  {% endfor %}
-	</ul>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <style>
+    h1 {
+      margin: 0px 0px 15px 20px;
+      font-family: sans-serif,'Josefin Slab', serif;
+    }
+    h2 {
+        text-align: center;
+        color: black;
+    }
+    .bar {
+      fill: steelblue;
+    }
+
+    .bar:hover {
+      fill: brown;
+    }
+
+    .label {
+      fill: black;
+      font: 10px sans-serif;
+    }
+
+    .y path, .y stroke, .y line {
+      display: none;
+    }
+
+    .x path, .x stroke {
+      display: none;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <script>
+
+
+    var margin = {
+        top: 20,
+        right: 20,
+        bottom: 30,
+        left: 240
+      };
+    var width = 960 - margin.left - margin.right;
+    var height = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear()
+          .range([0, width]);
+
+    var y = d3.scaleBand()
+        .range([height, 0]);
+
+
+    var yAxis = d3.axisLeft(y);
+
+    d3.select('body')
+      .append('h2')
+      .text('Arrest Rate of Crime Types in Chicago(2012-2016)');
+
+    d3.csv("Chicago_Crimes_2012_to_2016_light_arrest_prob.csv", function(error, data) {
+      if (error) throw error;
+
+      data.sort(function(a, b) {
+        return a['prob'] - b['prob'];
+      });
+
+      x.domain([0, d3.max(data, function(d) { return d['prob']; })]);
+
+      y.domain(data.map(function(d) { return d['Primary Type']; }))
+        .paddingInner(0.1);
+
+
+      svg.append("g")
+          .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+      svg.selectAll(".bar")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", "bar")
+          .attr("x", 0)
+          .attr("height", y.bandwidth())
+          .attr("y", function(d) { return y(d['Primary Type']); })
+          .attr("width", function(d) { return x(d['prob']); });
+
+    });
+
+    function type(d) {
+      d['prob'] = +d['prob'];
+      return d;
+    }
+
+  </script>
+
+</body>
