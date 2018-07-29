@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reusable Donut Chart in D3 v4</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        h2 {
+        text-align: center;
+        color: black;
+    }</style>
+    <script src="index.js"></script>
+</head>
+<body>
+
+<div id="chart"></div>
+
+<script>
+    var donut = donutChart()
+        .width(960)
+        .height(500)
+        .cornerRadius(3) // sets how rounded the corners are on each slice
+        .padAngle(0.015) // effectively dictates the gap between slices
+        .variable('probability')
+        .category('Primary Type');
+
+
+    var years=['2012','2013','2014','2015','2016'];
+
+    function update(year,data) {
+
+              var nested = d3.nest()
+                           .key(function(d) {
+                              return d['year'];
+                           })
+                           .entries(data);
+              function key_func(d) {
+                return d['key'];
+              };
+
+              var filtered = nested.filter(function(d) {
+                  return d['key']=== year;
+              });
+
+              return filtered[0].values;
+
+    }
+
+
+
+
+
+
+    var chart = d3.csv('Chicago_Crimes_2012_to_2016_light_donut.csv', function(error, data) {
+        if (error) throw error;
+        //debugger;
+        d3.select('#chart')
+            .datum(update('2012',data)) // bind data to the div
+            .call(donut); // draw chart in div
+    });
+
+
+  
+        var buttons = d3.select("body")
+                        .append("div")
+                        .attr("class", "years_buttons")
+                        .selectAll("div")
+                        .data(years)
+                        .enter()
+                        .append("div")
+                        .text(function(d) {
+                            return d;
+                        });
+
+        buttons.on("click", function(d) {
+                    d3.select(".years_buttons")
+                      .selectAll("div")
+                      .transition()
+                      .duration(500)
+                      .style("color", "black")
+                      .style("background", "rgb(251, 201, 127)");
+
+                    d3.select(this)
+                      .transition()
+                      .duration(500)
+                      .style("background", "lightBlue")
+                      .style("color", "white");
+
+                    d3.csv('Chicago_Crimes_2012_to_2016_light_donut.csv', function(error, data) {
+        if (error) throw error;
+        //debugger;
+        d3.select("svg").remove();
+
+        d3.select('#chart')
+            .datum(update(d,data)) // bind data to the div
+            .call(donut); // draw chart in div
+    });
+
+
+                });  
+    
+    d3.select('body')
+      .append('h2')
+      .text('Chicago Crime Types by Year(2012-2016)');
+ 
+
+
+
+
+</script>
+
+</body>
+</html>
