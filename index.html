@@ -1,30 +1,37 @@
----
-layout: default
-title: CS498-data visualization
----
-<div class="blurb">
-	<h1>Crimes in Chicago(2012-2016)</h1>
-	<p>This project is to use an interactive slideshow to illustrate the patterns of Chicago Crime.</p>
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="multiline.css">
-    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-    <!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
-       <style>
-        h2 {
-        text-align: center;
-        color: black;
-    }
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Crimes in Chicago(2012-2016)</title>
+            <!-- link to main stylesheet -->
+            <link rel="stylesheet" type="text/css" href="/css/main.css">
+            <link rel="stylesheet" type="text/css" href="multiline.css">
+            <meta charset="UTF-8">
 
-        circle {
-        opacity: 0.6;
-        stroke: none;
-    }
-    </style>        
-</head>
-<body>
-<div class="chart-wrapper" id="chart-line1"></div>
+            <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
+            <style>
+                h2 {
+                text-align: center;
+                color: black;
+                    }
+
+                circle {
+                opacity: 0.6;
+                stroke: none;
+                    }
+            </style>
+        </head>
+        <body>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/donut">Scene2</a></li>
+                    <li><a href="/sort_bar">Scene3</a></li>
+                </ul>
+            </nav>
+            <div class="container">
+
+            <div class="chart-wrapper" id="chart-line1"></div>
 
 <script type="text/javascript">
     d3.csv('data/Chicago_Crimes_2012_to_2016_light_multiline_agg.csv', function(error, data) {
@@ -59,6 +66,10 @@ title: CS498-data visualization
 });
 </script>
 <script src="multiline.js" charset="utf-8"></script>
-</body>
-</div><!-- /.blurb -->
-
+            
+            
+            
+            </div><!-- /.container -->
+            <footer></footer>
+        </body>
+    </html>
